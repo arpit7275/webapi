@@ -5,7 +5,7 @@
               <% if (@artist_det.include?("error"))%>
                   <h2> <%= @artist_det["message"] %> </h2>
               <% else %>
-                <% if ((@artist_det["results"]["opensearch:totalResults"]).to_i > 0) %>
+                <% if ((@artist_det["results"]["opensearch:totalResults"]).to_i > 1) %>
 
               <table class="table table-striped table-bordered table-condensed">
     <thead>
@@ -42,6 +42,9 @@
     
      <h2> <%= @similar_artist_det["message"] %> </h2>
 <% else %>
+    <% if (@similar_artist_det["similarartists"].include?("#text") != "\n")%>
+        <h2> The artist you supplied could not be found </h2>
+        <% else %>
 
 <table class="table table-striped table-bordered table-condensed">
     <thead>
@@ -66,6 +69,7 @@
     </tbody>
    
 </table>
+<% end %>
 <% end %>
 </div>
 
