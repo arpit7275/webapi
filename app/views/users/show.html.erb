@@ -1,10 +1,11 @@
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
+<h1>
+    Hey <%= @user.name %>
+</h1>
+<div class="api_search" style="width: 30%;margin-left: 400px;">
+
+    <%= form_tag("/search", method: "post") do %>
+        <%= label_tag(:artist, "Search for Artist:") %>
+    <%= text_field_tag(:artist) %>
+    <%= submit_tag("Search") %>
+<% end %>
 </div>

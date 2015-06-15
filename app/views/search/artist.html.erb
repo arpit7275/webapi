@@ -1,0 +1,75 @@
+<div class="container">
+      <div class="row">
+          <div class="col-xs-6">
+              <h1> <%=@artistname.capitalize%> Collection </h1>
+              <% if (@artist_det.include?("error"))%>
+                  <h2> <%= @artist_det["message"] %> </h2>
+              <% else %>
+                <% if ((@artist_det["results"]["opensearch:totalResults"]).to_i > 0) %>
+
+              <table class="table table-striped table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th colspan="1">Name</th>
+            <th colspan="1">Cover</th>
+            <th colspan="1">URL</th>
+        </tr>
+    </thead>
+    <tbody>
+<% @artist_det["results"]["artistmatches"]["artist"].each do |item| %>
+    <tr>
+        <td> <%= item["name"] %></td>
+        <td> <%= image_tag(item["image"][0]["#text"], alt: "Not Available")   %></td>
+        <td>  <%= link_to "Play", item["url"], :target => "_blank" %></td>
+        
+
+
+    
+    </tr> 
+    <% end %>
+    </tbody>
+   
+</table>
+<% else %>
+    <h2> No Data Found </h2>
+<% end %>
+<% end %>
+</div>
+<div class="col-xs-6">
+    <h1> Similar Artists </h1>
+   
+    <% if (@similar_artist_det.include?("error"))%>
+    
+     <h2> <%= @similar_artist_det["message"] %> </h2>
+<% else %>
+
+<table class="table table-striped table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th colspan="1">Name</th>
+            <th colspan="1">Cover</th>
+            <th colspan="1">URL</th>
+        </tr>
+    </thead>
+    <tbody>
+<% @similar_artist_det["similarartists"]["artist"].each do |item| %>
+    <tr>
+        <td> <%= item["name"] %></td>
+        <td> <%= image_tag(item["image"][0]["#text"], alt: "Not Available")%></td>
+        <td>  <%= link_to "Play", "http://" + item["url"], :target => "_blank" %></td>
+        
+
+
+    
+    </tr> 
+    <% end %>
+    </tbody>
+   
+</table>
+<% end %>
+</div>
+
+</div>
+</div>
+
+     
